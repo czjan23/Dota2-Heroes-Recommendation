@@ -1,0 +1,30 @@
+#cart-body {
+    width:100%;
+    height: 100%;
+}
+
+.paper {
+    height: 30%;
+    position: relative;
+}
+
+.cart {
+    margin-bottom: 5%;
+}
+
+.center {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.result-img {
+    width: 15%;
+    margin-left: 2%;
+    margin-right: 2%;
+}

@@ -1,0 +1,10 @@
+.hero {
+    display: inline-block;
+    padding-left: 0.55%;
+    padding-right: 0.55%;
+    width: 10%;
+}
+
+.img {
+    width:100%;
+}
