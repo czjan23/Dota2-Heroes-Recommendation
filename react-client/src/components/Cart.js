@@ -12,7 +12,8 @@ export default class Cart extends React.Component {
     this.state = {
       teammates: [],
       opponents: [],
-      results: []
+      results: [],
+      warning: ''
     };
   }
 
@@ -53,6 +54,12 @@ export default class Cart extends React.Component {
   };
 
   handleClick = () => {
+    if (this.state.teammates.length != 4 || this.state.opponents.length != 5) {
+      this.setState({warning: 'You have to select 4 teammates and 5 opponents...', results: []});
+      return;
+    } else {
+      this.setState({warning: '', results: []});
+    }
     let header = 'http://localhost:3001/results?';
     let tail = '';
     for (let i = 0; i < this.state.teammates.length; i++) {
@@ -145,7 +152,7 @@ export default class Cart extends React.Component {
           </Button>
           <div className="center">
             <Typography variant="h5">
-              {this.state.results.length > 0 ? '' : 'Your recommendations will be here...'}
+              {this.state.results.length > 0 ? '' : this.state.warning.length > 0 ? this.state.warning : 'Your recommendations will be here...'}
             </Typography>
             {this.state.results.map((id) => {
               return (

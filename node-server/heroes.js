@@ -233,4 +233,15 @@ const heroes = [{"id": 1, "name": "npc_dota_hero_antimage", "localized_name": "A
     {"id": 129, "name": "npc_dota_hero_mars", "localized_name": "Mars", "primary_attr": "str", "attack_type": "Melee",
         "roles": ["Carry", "Initiator", "Disabler", "Durable"], "legs": 2}];
 
-module.exports = heroes;
+idLookUpTab1 = {};
+idLookUpTab2 = {};
+heroes.forEach((hero, index) => {
+    idLookUpTab1[hero.id] = index;
+    idLookUpTab2[index] = hero.id;
+});
+
+module.exports = {
+    heroes,
+    idLookUpTab1,
+    idLookUpTab2
+};

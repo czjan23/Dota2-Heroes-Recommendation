@@ -1,20 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[31]:
-
-
-import numpy as np
 from tensorflow.keras.models import load_model
+import numpy as np
 
-class hero_recommendation():
+class HeroRecommendation():
     def __init__(self,team):
-        self.model = load_model('sigmoid prediction.model')  
+        self.model = load_model('sigmoid_prediction.model')  
         self.team = team
+        print('ok')
         
     def get_result(self):        
 
-        if(len(team)==9):
+        if(len(self.team)==9):
             vector = [0]*234 # if hero id is 5, index 5 will be 1
             res = [] #this vector stores each hero's winning change from index 0-116, each index is a hero
 
@@ -33,7 +28,7 @@ class hero_recommendation():
 
                 test = np.array(test)
 
-                prediction = model.predict(test) 
+                prediction = self.model.predict(test) 
                 winning_chance = (prediction[0] + 1-prediction[1])/2
                 res.append(float(winning_chance))
 
@@ -41,4 +36,3 @@ class hero_recommendation():
             return(res.argsort()[-5:][::-1])#print top 5 recommended heroes based on their winning rate
         else:
             print('wrong team size')
-
