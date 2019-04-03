@@ -54,7 +54,7 @@ export default class Cart extends React.Component {
   };
 
   handleClick = () => {
-    if (this.state.teammates.length != 4 || this.state.opponents.length != 5) {
+    if (this.state.teammates.length !== 4 || this.state.opponents.length !== 5) {
       this.setState({warning: 'You have to select 4 teammates and 5 opponents...', results: []});
       return;
     } else {
