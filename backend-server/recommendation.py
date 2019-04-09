@@ -35,25 +35,5 @@ class HeroRecommendation():
             res=np.array(res)
             return(res.argsort()[-5:][::-1])#print top 5 recommended heroes based on their winning rate
 
-        elif(len(self.team)==10):
-            vector = [0]*234 # if hero id is 5, index 5 will be 1
-            res = [] #this vector stores each hero's winning change from index 0-116, each index is a hero
-
-            for t in self.team:
-                vector[t] = 1
-
-            top = list(vector[0:117]) 
-            bot = list(vector[117:234])
-
-            test = []
-            test.append(top + bot)#regular    
-            test.append(bot + top) #flip top and bot
-
-            test = np.array(test)
-
-            prediction = self.model.predict(test) 
-            winning_chance = (prediction[0] + 1-prediction[1])/2
-
-            return winning_chance
         else:
             print('wrong team size')
