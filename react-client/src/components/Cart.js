@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Item from './Item';
+import Progress from './Progress';
 import './Cart.css';
 
 export default class Cart extends React.Component {
@@ -13,7 +14,8 @@ export default class Cart extends React.Component {
       teammates: [],
       opponents: [],
       results: [],
-      warning: ''
+      warning: '',
+      isWaitng: false
     };
   }
 
@@ -58,7 +60,7 @@ export default class Cart extends React.Component {
       this.setState({warning: 'You have to select 4 teammates and 5 opponents...', results: []});
       return;
     } else {
-      this.setState({warning: '', results: []});
+      this.setState({warning: '', results: [], isWaitng: true});
     }
     let header = 'http://localhost:3001/results?';
     let tail = '';
@@ -72,7 +74,7 @@ export default class Cart extends React.Component {
     fetch(url)
       .then(res => res.json())
       .then(res => {
-        this.setState({results: res});
+        this.setState({results: res, isWaitng: false});
       });
   };
 
@@ -151,14 +153,20 @@ export default class Cart extends React.Component {
             Get Your Recommendation
           </Button>
           <div className="center">
-            <Typography variant="h5">
-              {this.state.results.length > 0 ? '' : this.state.warning.length > 0 ? this.state.warning : 'Your recommendations will be here...'}
-            </Typography>
-            {this.state.results.map((id) => {
-              return (
-                <img className="result-img" alt='hero_img' key={id} src={require('../../public/hero_img/' + id + '.png')} />
-              )
-            })}
+          {this.state.isWaitng ? 
+            <Progress />
+            :
+            <div>
+              <Typography variant="h5">
+                {this.state.results.length > 0 ? '' : this.state.warning.length > 0 ? this.state.warning : 'Your recommendations will be here...'}
+              </Typography>
+              {this.state.results.map((id) => {
+                return (
+                  <img className="result-img" alt='hero_img' key={id} src={require('../../public/hero_img/' + id + '.png')} />
+                )
+              })}
+            </div>
+          }
           </div>
         </Paper>
       </div>
