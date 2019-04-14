@@ -63,6 +63,7 @@ export default class Cart extends React.Component {
       this.setState({warning: '', results: [], isWaitng: true});
     }
     let header = 'http://localhost:3001/results?';
+    // let header = window.location.href + 'results?';
     let tail = '';
     for (let i = 0; i < this.state.teammates.length; i++) {
       tail += 'team' + i + '=' + this.state.teammates[i].id + '&';

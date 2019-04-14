@@ -20,6 +20,7 @@ export default class Body extends React.Component {
 
   getHeroes() {
     let url = 'http://localhost:3001/heroes';
+    // let url = window.location.href + 'heroes';
     fetch(url)
       .then(res => res.json())
       .then(res => {
