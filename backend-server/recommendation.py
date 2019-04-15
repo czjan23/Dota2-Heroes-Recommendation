@@ -9,7 +9,7 @@ class HeroRecommendation():
         
     def get_result(self):        
 
-        if(len(team)==9):
+        if(len(self.team)==9):
             vector = [0]*234 # if hero id is 5, index 5 will be 1
             res = [] #this vector stores each hero's winning change from index 0-116, each index is a hero
 
