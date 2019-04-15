@@ -55,7 +55,7 @@ export default class Cart extends React.Component {
     console.log(e.dragData);
   };
 
-  handleClick = () => {
+  handleClick = (model, e) => {
     if (this.state.teammates.length !== 4 || this.state.opponents.length !== 5) {
       this.setState({warning: 'You have to select 4 teammates and 5 opponents...', results: []});
       return;
@@ -71,6 +71,7 @@ export default class Cart extends React.Component {
     for (let i = 0; i < this.state.opponents.length; i++) {
       tail += 'oppo' + i + '=' + this.state.opponents[i].id + '&';
     }
+    tail += 'model=' + model + '&';
     let url = header + tail;
     fetch(url)
       .then(res => res.json())
@@ -150,8 +151,11 @@ export default class Cart extends React.Component {
           </DropTarget>
 
         <Paper className="paper">
-          <Button size="large" variant="contained" color="primary" onClick={this.handleClick}>
-            Get Your Recommendation
+          <Button size="large" variant="contained" color="primary" onClick={this.handleClick.bind(this, 'softmax')}>
+            Softmax
+          </Button>
+          <Button size="large" variant="contained" color="primary" style={{marginLeft: '5px'}} onClick={this.handleClick.bind(this, 'sigmoid')}>
+            Sigmoid
           </Button>
           <div className="center">
           {this.state.isWaitng ? 

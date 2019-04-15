@@ -1,3 +1,5 @@
+softmax_prediction.model
+
 # Logs
 logs
 *.log

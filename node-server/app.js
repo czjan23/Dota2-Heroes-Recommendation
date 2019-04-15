@@ -13,20 +13,25 @@ app.get('/heroes', (req, res) => {
 
 app.get('/results', (req, response) => {
   let vec = [
-      hero.idLookUpTab1[Number(req.query.team0)],
-      hero.idLookUpTab1[Number(req.query.team1)],
-      hero.idLookUpTab1[Number(req.query.team2)],
-      hero.idLookUpTab1[Number(req.query.team3)],
-      hero.idLookUpTab1[Number(req.query.oppo0)],
-      hero.idLookUpTab1[Number(req.query.oppo1)],
-      hero.idLookUpTab1[Number(req.query.oppo2)],
-      hero.idLookUpTab1[Number(req.query.oppo3)],
-      hero.idLookUpTab1[Number(req.query.oppo4)],
-    ];
+    hero.idLookUpTab1[Number(req.query.team0)],
+    hero.idLookUpTab1[Number(req.query.team1)],
+    hero.idLookUpTab1[Number(req.query.team2)],
+    hero.idLookUpTab1[Number(req.query.team3)],
+    hero.idLookUpTab1[Number(req.query.oppo0)],
+    hero.idLookUpTab1[Number(req.query.oppo1)],
+    hero.idLookUpTab1[Number(req.query.oppo2)],
+    hero.idLookUpTab1[Number(req.query.oppo3)],
+    hero.idLookUpTab1[Number(req.query.oppo4)],
+  ];
+  let model = req.query.model;
+  let body = {
+    vec: vec,
+    model: model
+  };
   let url = 'http://localhost:5000/recommendations';
   fetch(url, {
           method: 'post',
-          body:    JSON.stringify(vec),
+          body:    JSON.stringify(body),
           headers: { 'Content-Type': 'application/json' },
       })
       .then(res => res.json())
@@ -35,7 +40,8 @@ app.get('/results', (req, response) => {
             res[index] = hero.idLookUpTab2[val]
           });
           response.send(res);
-      });
+      })
+      .catch(err => console.log(err));
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Server listening on port ${port}!`))
