@@ -16,6 +16,7 @@ def recommend():
     res = []
     for n in result:
         res.append(int(n))
+    del agent
     return jsonify(res)
 
 if __name__ == '__main__':
