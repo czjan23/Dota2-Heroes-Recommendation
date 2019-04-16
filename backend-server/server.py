@@ -28,7 +28,7 @@ def recommend_softmax(team):
 def recommend_sigmoid(team):
     sigmoid_model = load_model('sigmoid_prediction.model')
     vector = [0]*234
-    res = []
+    res = [0]*117
     for t in team[0:4]:
         vector[t] = 1
     for t in team[4:]:
@@ -45,7 +45,8 @@ def recommend_sigmoid(team):
         test = np.array(test)
         prediction = sigmoid_model.predict(test) 
         winning_chance = (prediction[0] + 1-prediction[1])/2
-        res.append(float(winning_chance))
+        res[z] = float(winning_chance)
+        
     res=np.array(res)
     clear_session()
     del sigmoid_model
