@@ -10,11 +10,11 @@ app = Flask(__name__)
 
 def recommend_softmax(team):
     softmax_model = load_model('softmax_prediction.model')
-    vector = [0]*234
+    vector = [0] * 234
     for t in team[0:4]:
         vector[t] = 1
     for t in team[4:]:
-        vector[117+t] = 1
+        vector[117 + t] = 1
     test = []
     test.append(vector)
     test = np.array(test)
@@ -27,16 +27,16 @@ def recommend_softmax(team):
 
 def recommend_sigmoid(team):
     sigmoid_model = load_model('sigmoid_prediction.model')
-    vector = [0]*234
-    res = [0]*117
+    vector = [0] * 234
+    res = [0] * 117
     for t in team[0:4]:
         vector[t] = 1
     for t in team[4:]:
-        vector[117+t] = 1
+        vector[117 + t] = 1
     for z in range(117):
         top = list(vector[0:117]) 
         bot = list(vector[117:234])
-        if(top[z]==1):
+        if(top[z] == 1 or bot[z] == 1):
             continue
         top[z] = 1
         test = []
@@ -44,9 +44,8 @@ def recommend_sigmoid(team):
         test.append(bot + top)
         test = np.array(test)
         prediction = sigmoid_model.predict(test) 
-        winning_chance = (prediction[0] + 1-prediction[1])/2
+        winning_chance = (prediction[0] + 1 - prediction[1]) / 2
         res[z] = float(winning_chance)
-        
     res=np.array(res)
     clear_session()
     del sigmoid_model
